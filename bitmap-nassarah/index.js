@@ -5,7 +5,7 @@ const bitmapRead = require('./lib/bitmap-read');
 const BitmapConstructor = require('./model/bitmap-constructor');
 
 
-bitmapRead('bitmap.bmp', function(err, data){
+bitmapRead('test.txt', function(err, data){
   console.log('Hello team!');
   if (err) console.error('omg error!');
   console.log('output data', data);
