@@ -4,46 +4,36 @@ const fs = require('fs');
 const EE = require('events');
 const myEE = new EE();
 
-// const transform = require('../lib/color-constructor.js');
-// const gray = require('../lib/gray-constructor.js');
+const invertTransform = require('./invert-transform.js');
+const grayTransform = require('./gray-transform.js');
 const rgbTransform = require('./rgb-transform.js');
 
-module.exports = function bitmapWriter(buffer) {
+module.exports = function bitmapWriter(object, programSelect, callback) {
   console.log('writer running');
-  var colorArray;
+  var colorArray = object.colorArray;
+  var pathName = object.pathName;
+  var buffer = object.wholeBuffer;
 
   myEE.on('first', function(){
     console.log('first writer');
-    colorArray = buffer.slice(54, 1078);
+    if (programSelect === 'invert') {
+      invertTransform(colorArray);
+    } else if (programSelect === 'gray') {
+      grayTransform(colorArray);
+    } else if (programSelect === 'rgb') {
+      rgbTransform(colorArray);
+    } else {
+      console.error('Command line transform option not entered');
+    }
     myEE.emit('second');
   });
 
   myEE.on('second', function(){
+    var newPathName = `new${pathName}`;
     console.log('second writer');
-    // transform(colorArray);
-    // gray(colorArray);
-    rgbTransform(colorArray);
-
-    // for (var i = 0; i < colorArray.length; i += 4) {
-    //   var arrayChunk = colorArray.slice([i], [i+4]);
-    //   // console.log('value[i]', [i]);
-    //   // for (var j = 0; j < arrayChunk.length; j++) {
-    //     // console.log('value[j]', colorArray[j]);
-    //   arrayChunk[0] = 255 - arrayChunk[0]; //blue
-    //   arrayChunk[1] = 255 - arrayChunk[1]; //green
-    //   arrayChunk[2] = 255 - arrayChunk[2]; //red
-    //   arrayChunk[3] = 255 - arrayChunk[3]; //alpha
-    //   console.log('arrayChunk', arrayChunk);
-    //   // }
-    // }
-    myEE.emit('third');
-  });
-
-  myEE.on('third', function(){
-    console.log('third writer');
-    fs.writeFile('../assets/newbitmap.bmp', buffer, function(){
-      console.log('successful write?', colorArray);
-      console.log('colorArray.length', colorArray.length);
+    fs.writeFile(`../assets/new${pathName}`, buffer, function(err, data) {
+      console.log('writefile data', data);
+      callback(null, newPathName);
     });
   });
   myEE.emit('first');
