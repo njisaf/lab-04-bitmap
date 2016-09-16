@@ -4,9 +4,9 @@ const fs = require('fs');
 const EE = require('events');
 const myEE = new EE();
 
-// const transform = require('../lib/color-constructor.js');
-// const gray = require('../lib/gray-constructor.js');
-const rgbTransform = require('./rgb-transform.js');
+// const transform = require('../lib/color-transform.js');
+const gray = require('../lib/gray-transform.js');
+// const rgbTransform = require('./rgb-transform.js');
 
 module.exports = function bitmapWriter(buffer) {
   console.log('writer running');
@@ -21,8 +21,8 @@ module.exports = function bitmapWriter(buffer) {
   myEE.on('second', function(){
     console.log('second writer');
     // transform(colorArray);
-    // gray(colorArray);
-    rgbTransform(colorArray);
+    gray(colorArray);
+    // rgbTransform(colorArray);
 
     // for (var i = 0; i < colorArray.length; i += 4) {
     //   var arrayChunk = colorArray.slice([i], [i+4]);
