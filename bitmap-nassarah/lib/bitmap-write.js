@@ -29,7 +29,6 @@ module.exports = function bitmapWriter(object, programSelect, callback) {
   myEE.on('second', function(){
     var newPathName = `new${pathName}`;
     fs.writeFile(`../assets/new${pathName}`, buffer, function() {
-      // console.log('writefile data', data);
       callback(null, newPathName);
     });
   });

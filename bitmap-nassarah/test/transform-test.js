@@ -6,12 +6,6 @@ const grayTransform = require('../lib/gray-transform.js');
 const rgbTransform = require('../lib/rgb-transform.js');
 const testArray = [55, 40, 25, 5];
 
-// var arrayChunk;
-
-// const bitmapWrite= require('../lib/bitmap-write.js');
-
-// assert.equal(actual, expected[, message])
-
 describe('testing all invert, gray, and rgb transforms', function() {
   describe('testing invert transform', function() {
     it('should return an inverted array', function() {
@@ -19,7 +13,6 @@ describe('testing all invert, gray, and rgb transforms', function() {
         console.log('data from invertTransform', data);
         assert.equal(data[0], '200', 'was not correct array, returned this:' + data);
       });
-      // assert.equal(invertedObject[0], '200');
     });
   });
 
