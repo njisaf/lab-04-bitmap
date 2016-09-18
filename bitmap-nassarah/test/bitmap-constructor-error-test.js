@@ -1,14 +1,19 @@
 'use strict';
 
 const assert = require('assert');
+const bitmapReader = require('../lib/bitmap-read');
 const bitmapConstructor = require('../model/bitmap-constructor');
-const testObject = ['not data', 'not a buffer'];
 
-describe('This tests whether bitmap-constructor will output an error if given data that is not a buffer. bitmap-constructor takes three parameters: a buffer object, a filename (which can be any string for the purposes of this test), and a callback.', function() {
-  it('bitmap-constructor should return an error message', function(done){
-    bitmapConstructor(testObject, 'anystring.test', function(err, object){
-      assert.isError('Test should return an error');
+describe('This tests whether bitmap-constructor is outputting a valid bitmap object', function() {
+  it('bitmap-constructor should return an object with a property .isBitmap with a value of \'BM\'', function(done){
+    bitmapReader('actuallyjpg.bmp', function(err, buffer){
+      bitmapConstructor(buffer, 'actuallyjpg.bmp', function(err, object){
+        console.log('isbitmap?', object.isBitmap);
+        var testThis = object.isBitmap;
+        console.log('testThis', testThis);
+        assert.equal(testThis, 'BM', 'This property should not read BM');
+      });
+      done();
     });
-    done();
   });
 });

@@ -15,11 +15,11 @@ module.exports = function bitmapWriter(object, programSelect, callback) {
 
   myEE.on('first', function(){
     if (programSelect === 'invert') {
-      invertTransform(colorArray);
+      invertTransform(colorArray, function(){});
     } else if (programSelect === 'gray') {
-      grayTransform(colorArray);
+      grayTransform(colorArray, function(){});
     } else if (programSelect === 'rgb') {
-      rgbTransform(colorArray);
+      rgbTransform(colorArray, function(){});
     } else {
       console.error('Command line transform option not entered');
     }

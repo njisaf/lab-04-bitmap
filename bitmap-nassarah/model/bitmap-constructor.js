@@ -10,6 +10,7 @@ module.exports = function buildObject(bufferIn, pathName, callback) {
 
 function Bitmap(buffer, pathName) {
   this.pathName = pathName;
+  this.isBitmap = buffer.toString('utf8', 0, 2);
   this.wholeBuffer = buffer;
   this.header = buffer.toString('utf8', 0, 15);
   this.fileSize = buffer.readUInt32LE(2, 6);
