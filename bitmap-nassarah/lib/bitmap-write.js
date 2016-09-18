@@ -9,13 +9,11 @@ const grayTransform = require('./gray-transform.js');
 const rgbTransform = require('./rgb-transform.js');
 
 module.exports = function bitmapWriter(object, programSelect, callback) {
-  console.log('writer running');
   var colorArray = object.colorArray;
   var pathName = object.pathName;
   var buffer = object.wholeBuffer;
 
   myEE.on('first', function(){
-    console.log('first writer');
     if (programSelect === 'invert') {
       invertTransform(colorArray);
     } else if (programSelect === 'gray') {
@@ -30,9 +28,8 @@ module.exports = function bitmapWriter(object, programSelect, callback) {
 
   myEE.on('second', function(){
     var newPathName = `new${pathName}`;
-    console.log('second writer');
-    fs.writeFile(`../assets/new${pathName}`, buffer, function(err, data) {
-      console.log('writefile data', data);
+    fs.writeFile(`../assets/new${pathName}`, buffer, function() {
+      // console.log('writefile data', data);
       callback(null, newPathName);
     });
   });
