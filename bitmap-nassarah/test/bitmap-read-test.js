@@ -1,9 +1,6 @@
 'use strict';
 
 const assert = require('assert');
-// const expect = require('expect');
-
-// const fs = require('fs');
 
 const bitmapRead = require('../lib/bitmap-read');
 
