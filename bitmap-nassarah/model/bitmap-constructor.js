@@ -3,8 +3,8 @@
 // const fs = require('fs');
 // const bitmapRead = require('../lib/bitmapRead');
 
-module.exports = function buildObject(buffer, pathName, callback) {
-  var bitmapObject = new Bitmap(buffer, pathName);
+module.exports = function buildObject(bufferIn, pathName, callback) {
+  var bitmapObject = new Bitmap(bufferIn, pathName);
   callback(null, bitmapObject);
 };
 
