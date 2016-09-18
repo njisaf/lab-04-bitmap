@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function GrayscaleBitmap(colorArray) {
+module.exports = function grayscaleBitmap(colorArray) {
   for (var i = 0; i < colorArray.length; i += 4) {
     var arrayChunk = colorArray.slice([i], [i+4]);
     var avg = (arrayChunk[0] + arrayChunk[1] + arrayChunk[2] + arrayChunk[3])/4;
