@@ -11,7 +11,7 @@ describe('This tests whether bitmap-constructor is outputting a valid bitmap obj
         console.log('isbitmap?', object.isBitmap);
         var testThis = object.isBitmap;
         console.log('testThis', testThis);
-        assert.equal(testThis, 'BM', 'This property should not read BM');
+        assert.ok(testThis !== 'BM', 'This property should not read BM');
       });
       done();
     });
