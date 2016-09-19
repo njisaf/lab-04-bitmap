@@ -8,7 +8,6 @@ module.exports = function grayscaleBitmap(colorArray, callback) {
     arrayChunk[1] = avg; //green
     arrayChunk[2] = avg; //red
     arrayChunk[3] = avg; //alpha
-    // console.log('arrayChunk', arrayChunk);
   }
   callback(arrayChunk);
 };
