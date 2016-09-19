@@ -14,7 +14,6 @@ function runProgram(){
     bitmapReader(fileSelect, function(err, buffer){
       if (err) throw console.error('Error! Not a valid file.\nFiles much be in form filename.bmp, and must be in the assets directory.');
       bitmapConstructor(buffer, fileSelect, function(err, object){
-        console.log('object', object);
         if (err) throw console.error('Error! bitmapConstructor is not receiving a valid buffer object.');
         if (object.isBitmap != 'BM') throw console.error('Error! File does not appear to be a valid bitmap file.');
         bitmapWriter(object, programSelect, function(err, newFilePath){

@@ -14,6 +14,11 @@ module.exports = function bitmapWriter(object, programSelect, callback) {
   var buffer = object.wholeBuffer;
 
   myEE.on('first', function(){
+    if (colorArray[0] === undefined) colorArray = object.pixelArray;
+    myEE.emit('second');
+  });
+
+  myEE.on('second', function(){
     if (programSelect === 'invert') {
       invertTransform(colorArray, function(){});
     } else if (programSelect === 'gray') {
@@ -21,12 +26,12 @@ module.exports = function bitmapWriter(object, programSelect, callback) {
     } else if (programSelect === 'rgb') {
       rgbTransform(colorArray, function(){});
     } else {
-      console.error('Command line transform option not entered');
+      console.error('Error! Transform if/else statement running to end');
     }
-    myEE.emit('second');
+    myEE.emit('third');
   });
 
-  myEE.on('second', function(){
+  myEE.on('third', function(){
     var newPathName = `new${pathName}`;
     fs.writeFile(`../assets/new${pathName}`, buffer, function() {
       callback(null, newPathName);
