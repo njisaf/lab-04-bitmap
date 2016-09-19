@@ -2,6 +2,9 @@
 
 const os = require('os');
 
+// const fs = require('fs');
+// const bitmapRead = require('../lib/bitmapRead');
+
 module.exports = function buildObject(bufferIn, pathName, callback) {
   var bitmapObject = new Bitmap(bufferIn, pathName);
   callback(null, bitmapObject);
