@@ -12,10 +12,11 @@ function Bitmap(buffer, pathName) {
   this.isBitmap = buffer.toString('utf8', 0, 2);
   this.wholeBuffer = buffer;
   this.header = buffer.toString('utf8', 0, 15);
+  this.headerLength = checkEndian(buffer, 14, 18) + 14;
   this.endianness = os.endianness();
   this.fileSize = checkEndian(buffer, 2, 6);
   this.offset = checkEndian(buffer, 10, 14);
-  this.colorArray = buffer.slice(54, this.offset);
+  this.colorArray = buffer.slice(this.headerLength, this.offset);
   this.pixelArray = buffer.slice(this.offset);
 }
 
